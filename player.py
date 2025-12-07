@@ -31,14 +31,11 @@ class Player(CircleShape):
         self.position += rotated_with_speed_vector
 
     def shoot(self):
-        x = self.position.x
-        y = self.position.y
-        shot = Shot(x, y, SHOT_RADIUS) #will the coordinates work?
+        shot = Shot(self.position.x, self.position.y, SHOT_RADIUS) 
         shot_unit_vector = pygame.Vector2(0, 1)
         shot_rotated_vector = shot_unit_vector.rotate(self.rotation)
-        shot_rotated_with_speed_vector = shot_rotated_vector * PLAYER_SHOOT_SPEED 
-        shot.position += shot_rotated_with_speed_vector
-
+        shot.velocity = shot_rotated_vector * PLAYER_SHOOT_SPEED 
+    
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
@@ -58,6 +55,7 @@ class Player(CircleShape):
         
         if keys[pygame.K_SPACE]:
             self.shoot()
+        
     
 
 
